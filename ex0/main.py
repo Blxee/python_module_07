@@ -26,4 +26,7 @@ def main() -> None:
 
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except Exception:
+        print("[Error]: an unknown error happened duing testing of ex0.")
