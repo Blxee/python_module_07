@@ -1,3 +1,29 @@
+from ex2.EliteCard import EliteCard
+
+
+def main() -> None:
+    """Test the elitecard"""
+    print("\n=== DataDeck Ability System ===")
+    print("\nEliteCard capabilities:")
+    # print methods of each of card, magical, combatant
+
+    arcane_warrior: EliteCard = EliteCard("Arcane Warrior")
+    print(f"\nPlaying {arcane_warrior.name} (Elite Card):")
+    print("\nCombat phase:")
+    print("Attack result:", arcane_warrior.attack())
+    print("Defense result:", arcane_warrior.defend())
+
+    print("\nMagic phase:")
+    print("Spell cast:", arcane_warrior.cast_spell())
+    print("Mana channel:", arcane_warrior.channel_mana())
+    print("\nMultiple interface implementation successful!")
+
+
+if __name__ == "__main__":
+    try:
+        main()
+    except Exception as error:
+        print("[Error]:", error)
 """
 
 === DataDeck Ability System ===
