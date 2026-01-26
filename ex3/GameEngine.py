@@ -1,6 +1,7 @@
 from ex3.GameStrategy import GameStrategy
 from ex3.CardFactory import CardFactory
 from ex0.Card import Card
+from ex1.Deck import Deck
 
 
 class GameEngine:
@@ -8,27 +9,29 @@ class GameEngine:
         self.turns_simulated = 0
         self.total_damage = 0
         self.cards_created = 0
+        self.deck: Deck = Deck()
 
     def configure_engine(
         self, factory: CardFactory, strategy: GameStrategy
     ) -> None:
         self.factory = factory
         self.strategy = strategy
-        self.available_type: list[Card] = [
-            factory.create_creature("dragon"),
-            factory.create_creature("goblin"),
-            factory.create_spell("fireball"),
-            factory.create_artifact("mana_ring"),
-        ]
+        for lst in factory.create_themed_deck(3).values():
+            for card in lst:
+                print(card)
+                self.deck.add_card(card)
+
 
     def simulate_turn(self) -> dict:
-        pass
+        cards: list[str] = [f"{card.name} ({card.cost})" for card in self.deck.cards]
+        print("Hand:", str(cards).replace("'", ""))
+        self.strategy.execute_turn(hand, battlefield)
 
     def get_engine_status(self) -> dict:
         pass
         return {
             "turns_simulated": self.turns_simulated,
-            "strategy_used": self.strategy.__class__.__name,
+            "strategy_used": self.strategy.__class__.__name__,
             "total_damage": self.total_damage,
             "cards_created": self.cards_created,
         }

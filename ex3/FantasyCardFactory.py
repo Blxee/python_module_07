@@ -42,15 +42,18 @@ class FantasyCardFactory(CardFactory):
                 ],
             }
         }
-        self.types["mana_ring"] = {
-            "names": ["Mana Ring", "The One Ring", "Mind Control Ring"],
-            "cost_range": range(4, 9),
-            "durability_range": range(3, 8),
-            "effects": [
-                "Restore Mana",
-                "Paralyze opponents",
-                "Reduce Defense of Opponents",
-            ],
+        self.types["artifacts"] = {
+            "mana_ring": {
+                "names": ["Mana Ring", "The One Ring", "Mind Control Ring"],
+                "cost_range": range(4, 9),
+                "rarities": ["rare", "epic", "legendary"],
+                "durability_range": range(3, 8),
+                "effects": [
+                    "Restore Mana",
+                    "Paralyze opponents",
+                    "Reduce Defense of Opponents",
+                ],
+            }
         }
 
     def create_creature(self, name_or_power: str | int | None = None) -> Card:
@@ -81,7 +84,7 @@ class FantasyCardFactory(CardFactory):
         return SpellCard(name, cost, rarity, effect_type)
 
     def create_artifact(self, name_or_power: str | int | None = None) -> Card:
-        artifact = random.choice(list(self.types["mana_ring"].values()))
+        artifact = random.choice(list(self.types["artifacts"].values()))
         if isinstance(name_or_power, str):
             name = name_or_power
         else:
@@ -95,15 +98,15 @@ class FantasyCardFactory(CardFactory):
     def create_themed_deck(self, size: int) -> dict:
         cards: dict[str, list] = {}
         for _ in range(size):
-            key = random.choice(self.types)
+            key = random.choice(list(self.types))
             card = None
             match key:
                 case "creatures":
-                    card = [self.create_creature()]
+                    card = self.create_creature()
                 case "spells":
-                    card = [self.create_spell()]
-                case "mana_ring":
-                    card = [self.create_artifact()]
+                    card = self.create_spell()
+                case "artifacts":
+                    card = self.create_artifact()
             if key in cards:
                 cards[key].append(card)
             else:
