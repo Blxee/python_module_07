@@ -10,6 +10,7 @@ def main() -> None:
     strategy: AggressiveStrategy = AggressiveStrategy()
     game_engine: GameEngine = GameEngine()
     game_engine.configure_engine(factory, strategy)
+
     print("Factory:", game_engine.factory.__class__.__name__)
     print("Strategy:", game_engine.strategy.__class__.__name__)
     print("Available types:", game_engine.factory.get_supported_types())
@@ -17,8 +18,8 @@ def main() -> None:
     print("\nSimulating aggressive turn...")
     simulation_result = game_engine.simulate_turn()
 
-    print("\nTurn execution:")
     print("\nGame Report:")
+    print(game_engine.get_engine_status())
     print(
         "\nAbstract Factory + Strategy Pattern: Maximum flexibility achieved!"
     )

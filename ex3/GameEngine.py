@@ -18,14 +18,14 @@ class GameEngine:
         self.strategy = strategy
         for lst in factory.create_themed_deck(3).values():
             for card in lst:
-                print(card)
                 self.deck.add_card(card)
 
-
     def simulate_turn(self) -> dict:
-        cards: list[str] = [f"{card.name} ({card.cost})" for card in self.deck.cards]
-        print("Hand:", str(cards).replace("'", ""))
-        self.strategy.execute_turn(hand, battlefield)
+        hand: list[str] = [
+            f"{card.name} ({card.cost})" for card in self.deck.cards
+        ]
+        print("Hand:", str(hand).replace("'", ""))
+        self.strategy.execute_turn(hand, [])
 
     def get_engine_status(self) -> dict:
         pass
