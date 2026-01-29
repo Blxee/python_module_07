@@ -12,8 +12,12 @@ def main() -> None:
     print("\nBuilding deck with different card types...")
     deck: Deck = Deck()
     deck.add_card(CreatureCard("Fire Dragon", 5, "Legendary", 7, 5))
-    deck.add_card(ArtifactCard("Mana Crystal", 2, "Mythical", 3, "+1 mana per turn"))
-    deck.add_card(SpellCard("Lightning Bolt", 3, "Rare", EffectType.DAMAGE))
+    deck.add_card(
+        ArtifactCard("Mana Crystal", 2, "Mythical", 3, "+1 mana per turn")
+    )
+    deck.add_card(
+        SpellCard("Lightning Bolt", 3, "Rare", EffectType.DAMAGE.value)
+    )
 
     print("Deck stats:", deck.get_deck_stats())
 
@@ -21,12 +25,14 @@ def main() -> None:
     # seed the random generator so we get the same order in the example.
     random.seed(129)
     deck.shuffle()
-    for i in range(3):
+    for _ in range(3):
         card: Card = deck.draw_card()
-        print(f"\nDrew: {card.name} ({card.type})")
+        print(f"\nDrew: {card.name} ({card.type.value})")
         print("Play result:", card.play({"available_mana": 10}))
 
-    print("\nPolymorphism in action: Same interface, different card behaviors!")
+    print(
+        "\nPolymorphism in action: Same interface, different card behaviors!"
+    )
 
 
 if __name__ == "__main__":

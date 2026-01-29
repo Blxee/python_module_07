@@ -1,12 +1,16 @@
 from typing import Dict
-from ex0.Card import Card
+from ex0.Card import Card, CardType
 from sys import stderr
 
 
 class ArtifactCard(Card):
-    type = "Artifact"
+    """Artifact card for cards which are artifacts."""
 
-    def __init__(self, name: str, cost: int, rarity: str, durability: int, effect: str):
+    type: CardType = CardType.ARTIFACT
+
+    def __init__(
+        self, name: str, cost: int, rarity: str, durability: int, effect: str
+    ):
         """Create a new ArtifactCard."""
         super().__init__(name, cost, rarity)
         self.durability = durability
@@ -15,7 +19,7 @@ class ArtifactCard(Card):
     def play(self, game_state: Dict) -> Dict:
         """Play this artifact card."""
         if not isinstance(game_state, dict):
-            print(f"[Error]: invalid argument type to play.", file=stderr)
+            print("[Error]: invalid argument type to play.", file=stderr)
             exit(1)
 
         if self.durability <= 0:
@@ -33,7 +37,4 @@ class ArtifactCard(Card):
 
     def activate_ability(self) -> Dict:
         """Activate this permanent ability for the current match."""
-        return {
-            "effect": f"Permanent: {self.effect}"
-        }
-
+        return {"effect": f"Permanent: {self.effect}"}

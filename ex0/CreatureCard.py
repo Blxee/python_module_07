@@ -1,11 +1,12 @@
-from ex0.Card import Card
+from ex0.Card import Card, CardType
 from sys import stderr
+from typing import Dict
 
 
 class CreatureCard(Card):
     """Card of type creature."""
 
-    type: str = "Creature"
+    type: CardType = CardType.CREATURE
 
     def __init__(
         self,
@@ -15,10 +16,14 @@ class CreatureCard(Card):
         attack: int,
         health: int,
     ) -> None:
-        """Constructor for CreatureCard class."""
+        """Create a CreatureCard instance."""
         super().__init__(name, cost, rarity)
         if not isinstance(attack, int) or not isinstance(health, int):
-            print(f"[Error]: invalid argument type to {self.__class__.__name__}.", file=stderr)
+            print(
+                "[Error]: invalid argument type"
+                f" to {self.__class__.__name__}.",
+                file=stderr,
+            )
             exit(1)
         if attack < 0 or health < 0:
             print("[Error]: attack and health must be positive.", file=stderr)
@@ -26,10 +31,10 @@ class CreatureCard(Card):
         self.attack: int = attack
         self.health: int = health
 
-    def play(self, game_state: dict) -> dict:
+    def play(self, game_state: Dict) -> Dict:
         """Play the card using the current game stats."""
         if not isinstance(game_state, dict):
-            print(f"[Error]: invalid argument type to play.", file=stderr)
+            print("[Error]: invalid argument type to play.", file=stderr)
             exit(1)
         available_mana = game_state.get("available_mana", 0)
 
@@ -44,9 +49,13 @@ class CreatureCard(Card):
                 "effect": "Not enough mana to summon creature",
             }
 
-    def attack_target(self, target: "CreatureCard") -> dict:
+    def attack_target(self, target: "CreatureCard") -> Dict:
+        """Attack the target using the attack damage."""
         if not isinstance(target, CreatureCard):
-            print(f"[Error]: invalid argument type to attack_target.", file=stderr)
+            print(
+                "[Error]: invalid argument type to attack_target.",
+                file=stderr,
+            )
             exit(1)
         """Make the creature card attack."""
         target.health -= self.attack

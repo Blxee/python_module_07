@@ -2,7 +2,7 @@ from ex0.CreatureCard import CreatureCard
 
 
 def main() -> None:
-    """Main function"""
+    """Define entry point of the program."""
     print("\n=== DataDeck Card Foundation ===")
 
     print("\nTesting Abstract Base Class Design:")

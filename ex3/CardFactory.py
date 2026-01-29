@@ -1,25 +1,36 @@
-from abc import ABC, abstractmethod
+from abc import ABC
 from ex0.Card import Card
-from typing import Dict
 
 
 class CardFactory(ABC):
-    @abstractmethod
-    def create_creature(
-        self, name_or_power: str | int | None = None
-    ) -> Card: ...
+    """Abstract superclass for all card factories."""
 
-    @abstractmethod
-    def create_spell(self, name_or_power: str | int | None = None) -> Card: ...
+    def create_creature(self, name_or_power: str | int | None = None) -> Card:
+        """Create the creature for the creature to be created."""
+        ...
 
-    @abstractmethod
-    def create_artifact(
-        self, name_or_power: str | int | None = None
-    ) -> Card: ...
+    create_creature.__isabstractmethod__ = True
 
-    @abstractmethod
-    def create_themed_deck(self, size: int) -> dict: ...
+    def create_spell(self, name_or_power: str | int | None = None) -> Card:
+        """Create a spell."""
+        ...
 
-    @abstractmethod
+    create_spell.__isabstractmethod__ = True
+
+    def create_artifact(self, name_or_power: str | int | None = None) -> Card:
+        """Create an artifact."""
+        ...
+
+    create_artifact.__isabstractmethod__ = True
+
+    def create_themed_deck(self, size: int) -> dict:
+        """Create a random deck of cards of a specific size."""
+        ...
+
+    create_themed_deck.__isabstractmethod__ = True
+
     def get_supported_types(self) -> dict:
-        pass
+        """Get all the supported types of cards this factory can create."""
+        ...
+
+    get_supported_types.__isabstractmethod__ = True
