@@ -3,6 +3,7 @@ from ex3.CardFactory import CardFactory
 from ex0.Card import Card
 from ex1.Deck import Deck
 from random import randint
+from sys import stderr
 
 
 class GameEngine:
@@ -15,6 +16,9 @@ class GameEngine:
     def configure_engine(
         self, factory: CardFactory, strategy: GameStrategy
     ) -> None:
+        if not isinstance(factory, CardFactory) or not isinstance(strategy, GameStrategy):
+            print("[Error]: invalid arguments to configure_engine()", file=stderr)
+            exit(1)
         self.factory = factory
         self.strategy = strategy
         for lst in factory.create_themed_deck(3).values():

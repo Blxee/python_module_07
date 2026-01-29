@@ -6,6 +6,7 @@ from sys import stderr
 
 
 class EliteCard(Card, Combatable, Magical):
+    """Special cards which is combatable and magical."""
     type: CardType = CardType.ELITE
 
     def __init__(
@@ -25,7 +26,8 @@ class EliteCard(Card, Combatable, Magical):
             or not isinstance(defense, int)
         ):
             print(
-                f"[Error]: invalid argument type to {self.__class__.__name__}.",
+                "[Error]: invalid argument "
+                f"type to {self.__class__.__name__}.",
                 file=stderr,
             )
             exit(1)
@@ -40,7 +42,24 @@ class EliteCard(Card, Combatable, Magical):
         self.health: int = health
         self.total_mana: int = cost * 2
 
-    def play(self, game_state: Dict) -> Dict: ...
+    def play(self, game_state: Dict) -> Dict:
+        """Play the card using the current game stats."""
+        if not isinstance(game_state, dict):
+            print("[Error]: invalid argument type to play.", file=stderr)
+            exit(1)
+
+        available_mana = game_state.get("available_mana", 0)
+
+        if self.is_playable(available_mana):
+            return {
+                "card_played": self.name,
+                "mana_used": self.cost,
+                "effect": "EliteCard summoned to battlefield",
+            }
+        else:
+            return {
+                "effect": "Not enough mana to summon EliteCard",
+            }
 
     def attack(self, target: Union[Combatable, Card]) -> Dict:
         """Abstract method to attack with this card."""

@@ -26,7 +26,7 @@ def main() -> None:
 
 
 if __name__ == "__main__":
-    try:
+    # try:
         main()
-    except Exception as error:
-        print("[Error]:", error)
+    # except Exception as error:
+    #     print("[Error]:", error)
