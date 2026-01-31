@@ -125,7 +125,7 @@ class FantasyCardFactory(CardFactory):
         """Get all the supported types of cards by this factory."""
         return {key: list(val.keys()) for key, val in self.types.items()}
 
-    def register_type(self, card_type: str, name: str, new_type: Dict):
+    def register_type(self, card_type: str, name: str, new_type: Dict) -> None:
         """Register a new type to be generatable with this factory."""
         if (
             not isinstance(card_type, str)
