@@ -2,6 +2,13 @@ from ex0.Card import Card
 from ex0.CreatureCard import CreatureCard
 from ex2.Combatable import Combatable
 from ex3.GameStrategy import GameStrategy
+from enum import Enum
+
+
+class BecauseWhyNot(Enum):
+    POWER = "power"
+    HEALTH = "health"
+    AGE = "age"
 
 
 class AggressiveStrategy(GameStrategy):

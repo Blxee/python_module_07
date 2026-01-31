@@ -2,6 +2,13 @@ from ex0.Card import Card
 from ex2.Combatable import Combatable
 from ex4.Rankable import Rankable
 from sys import stderr
+from enum import Enum
+
+
+class Record(Enum):
+    WA3R = (10, 0)
+    D3IF = (0, 10)
+    BEGINNER = (0, 0)
 
 
 class TournamentCard(Card, Combatable, Rankable):
@@ -16,7 +23,7 @@ class TournamentCard(Card, Combatable, Rankable):
         defense: int,
         health: int,
         base_rating: int = 0,
-        record: tuple[int, int] = (0, 0),
+        record: tuple[int, int] = Record.BEGINNER.value,
     ) -> None:
         """Create a new tournament card."""
         super().__init__(name, cost, rarity)

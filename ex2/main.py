@@ -1,4 +1,4 @@
-from ex2.EliteCard import EliteCard
+from ex2.EliteCard import EliteCard, Rarity
 
 
 def main() -> None:
@@ -9,7 +9,7 @@ def main() -> None:
     arcane_warrior: EliteCard = EliteCard(
         "Arcane Warrior", 4, "rare", 5, 3, 10
     )
-    enemy: EliteCard = EliteCard("Enemy", 2, "common", 3, 1, 4)
+    enemy: EliteCard = EliteCard("Enemy", 2, Rarity.COMMON.value, 3, 1, 4)
     # print methods of each of card, magical, combatant
     interfaces = type(arcane_warrior).__bases__
     for base in interfaces:

@@ -2,6 +2,7 @@ from ex4.TournamentCard import TournamentCard
 from sys import stderr
 from itertools import count
 from typing import Any
+from random import randint
 
 
 class TournamentPlatform:
@@ -44,7 +45,7 @@ class TournamentPlatform:
         attacking_id: str = card1_id
         defending_id: str = card2_id
 
-        for _ in range(100):
+        for _ in range(randint(50, 100)):
             result: dict[str, Any] = attacking.attack(defending)
             # if defending card losses, end the combat
             if not result["target_alive"]:

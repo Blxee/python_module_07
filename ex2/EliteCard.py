@@ -3,6 +3,17 @@ from ex0.Card import Card, CardType
 from ex2.Magical import Magical
 from ex2.Combatable import Combatable
 from sys import stderr
+from random import randint
+from enum import Enum
+
+
+class Rarity(Enum):
+    COMMON = "common"
+    UNCOMMON = "uncommon"
+    RARE = "rare"
+    EPIC = "epic"
+    LEGENDARY = "legendary"
+    MYTHICAL = "mythical"
 
 
 class EliteCard(Card, Combatable, Magical):
@@ -41,7 +52,7 @@ class EliteCard(Card, Combatable, Magical):
         self.damage: int = damage
         self.defense: int = defense
         self.health: int = health
-        self.total_mana: int = cost * 2
+        self.total_mana: int = randint(cost * 2 - 1, cost * 2 + 2)
 
     def play(self, game_state: Dict) -> Dict:
         """Play the card using the current game stats."""
