@@ -10,7 +10,7 @@ class ArtifactCard(Card):
 
     def __init__(
         self, name: str, cost: int, rarity: str, durability: int, effect: str
-    ):
+    ) -> None:
         """Create a new ArtifactCard."""
         super().__init__(name, cost, rarity)
         self.durability = durability

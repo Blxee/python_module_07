@@ -7,6 +7,7 @@ from sys import stderr
 
 class EliteCard(Card, Combatable, Magical):
     """Special cards which is combatable and magical."""
+
     type: CardType = CardType.ELITE
 
     def __init__(

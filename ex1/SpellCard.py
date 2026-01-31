@@ -16,7 +16,7 @@ class EffectType(Enum):
     @staticmethod
     def get_effect_message(
         value: str, amount: int, attribute: Optional[str] = None
-    ):
+    ) -> str:
         """Get correct message of each effect."""
         match value:
             case EffectType.DAMAGE.value:
@@ -36,7 +36,9 @@ class SpellCard(Card):
 
     type: CardType = CardType.SPELL
 
-    def __init__(self, name: str, cost: int, rarity: str, effect_type: str):
+    def __init__(
+        self, name: str, cost: int, rarity: str, effect_type: str
+    ) -> None:
         """Create a new SpellCard."""
         super().__init__(name, cost, rarity)
         if not isinstance(effect_type, str):

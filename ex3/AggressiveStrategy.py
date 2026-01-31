@@ -1,4 +1,3 @@
-from random import choice
 from ex0.Card import Card
 from ex0.CreatureCard import CreatureCard
 from ex2.Combatable import Combatable

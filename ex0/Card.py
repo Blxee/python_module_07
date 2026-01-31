@@ -18,7 +18,7 @@ class Card(ABC):
 
     type: CardType
 
-    def __init__(self, name: str, cost: int, rarity: str):
+    def __init__(self, name: str, cost: int, rarity: str) -> None:
         """Create a new Card."""
         if (
             not isinstance(name, str)

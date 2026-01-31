@@ -127,17 +127,29 @@ class FantasyCardFactory(CardFactory):
 
     def register_type(self, card_type: str, name: str, new_type: Dict):
         """Register a new type to be generatable with this factory."""
-        if not isinstance(card_type, str) or not isinstance(name, str) or not isinstance(new_type, dict):
+        if (
+            not isinstance(card_type, str)
+            or not isinstance(name, str)
+            or not isinstance(new_type, dict)
+        ):
             print("[Error]: invalid arguments to register_type()", file=stderr)
             return
         if card_type not in ["creatures", "spells", "artifacts"]:
-            print("[Error]: there is no such card type:", card_type, file=stderr)
+            print(
+                "[Error]: there is no such card type:", card_type, file=stderr
+            )
             return
         for key in ["names", "cost_range", "rarities"]:
             if key not in new_type:
-                print(f"[Error]: {key} is not present in new_type", file=stderr)
+                print(
+                    f"[Error]: {key} is not present in new_type", file=stderr
+                )
                 return
-        if not isinstance(new_type["names"], list) or not isinstance(new_type["cost_range"], range) or not isinstance(new_type["rarities"], list):
+        if (
+            not isinstance(new_type["names"], list)
+            or not isinstance(new_type["cost_range"], range)
+            or not isinstance(new_type["rarities"], list)
+        ):
             print("[Error]: invalid value types in new_type", file=stderr)
             return
         for name in new_type["names"]:
@@ -145,23 +157,43 @@ class FantasyCardFactory(CardFactory):
                 print("[Error]: invalid names types in new_type", file=stderr)
                 return
         for rarity in new_type["rarities"]:
-            if rarity not in ["common", "uncommon", "rare", "epic", "legendary", "mythical"]:
-                print("[Error]: invalid rarities types in new_type", file=stderr)
+            if rarity not in [
+                "common",
+                "uncommon",
+                "rare",
+                "epic",
+                "legendary",
+                "mythical",
+            ]:
+                print(
+                    "[Error]: invalid rarities types in new_type", file=stderr
+                )
                 return
         match card_type:
             case "creatures":
-                if not isinstance(new_type.get("attack_range"), range) or not isinstance(new_type.get("health_range"), range):
+                if not isinstance(
+                    new_type.get("attack_range"), range
+                ) or not isinstance(new_type.get("health_range"), range):
                     print("[Error]: invalid keys/values in new_type")
                     return
             case "spells":
-                if "effect_types" not in new_type or not isinstance(new_type["effect_types"], list) or not all(e in [et.value for et in EffectType] for e in new_type["effect_types"]):
+                if (
+                    "effect_types" not in new_type
+                    or not isinstance(new_type["effect_types"], list)
+                    or not all(
+                        e in [et.value for et in EffectType]
+                        for e in new_type["effect_types"]
+                    )
+                ):
                     print("[Error]: invalid keys/values in new_type")
                     return
             case "artifacts":
                 if not isinstance(new_type.get("durability_range"), range):
                     print("[Error]: invalid keys/values in new_type")
                     return
-                if not isinstance(new_type.get("effects"), list) or any(not isinstance(i, str) for i in new_type["effects"]):
+                if not isinstance(new_type.get("effects"), list) or any(
+                    not isinstance(i, str) for i in new_type["effects"]
+                ):
                     print("[Error]: invalid keys/values in new_type")
                     return
 

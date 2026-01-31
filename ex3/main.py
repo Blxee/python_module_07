@@ -16,7 +16,7 @@ def main() -> None:
     print("Available types:", game_engine.factory.get_supported_types())
 
     print("\nSimulating aggressive turn...")
-    simulation_result = game_engine.simulate_turn()
+    _ = game_engine.simulate_turn()
 
     print("\nGame Report:")
     print(game_engine.get_engine_status())
@@ -27,6 +27,6 @@ def main() -> None:
 
 if __name__ == "__main__":
     # try:
-        main()
-    # except Exception as error:
-    #     print("[Error]:", error)
+    main()
+# except Exception as error:
+#     print("[Error]:", error)

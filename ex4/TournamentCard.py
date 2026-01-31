@@ -17,7 +17,7 @@ class TournamentCard(Card, Combatable, Rankable):
         health: int,
         base_rating: int = 0,
         record: tuple[int, int] = (0, 0),
-    ):
+    ) -> None:
         """Create a new tournament card."""
         super().__init__(name, cost, rarity)
         if (

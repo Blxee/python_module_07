@@ -7,7 +7,7 @@ from sys import stderr
 
 
 class GameEngine:
-    def __init__(self):
+    def __init__(self) -> None:
         self.turns_simulated: int = 0
         self.total_damage: int = 0
         self.cards_created: int = 0
@@ -16,8 +16,12 @@ class GameEngine:
     def configure_engine(
         self, factory: CardFactory, strategy: GameStrategy
     ) -> None:
-        if not isinstance(factory, CardFactory) or not isinstance(strategy, GameStrategy):
-            print("[Error]: invalid arguments to configure_engine()", file=stderr)
+        if not isinstance(factory, CardFactory) or not isinstance(
+            strategy, GameStrategy
+        ):
+            print(
+                "[Error]: invalid arguments to configure_engine()", file=stderr
+            )
             exit(1)
         self.factory = factory
         self.strategy = strategy
